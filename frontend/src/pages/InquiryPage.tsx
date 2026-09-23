@@ -74,38 +74,42 @@ export function InquiryPage() {
   }
 
   return (
-    <main className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
-      <header className="mb-10">
-        <p className="text-xs uppercase tracking-[0.32em] text-[#d6b57a]">Plan your event</p>
-        <h1 className="mt-3 text-4xl font-medium tracking-[-0.05em] text-[#f4efe7] sm:text-5xl">Share a few details and we’ll take it from there.</h1>
+    <main className="mx-auto max-w-5xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+      <header className="mb-8 max-w-2xl">
+        <p className="text-[11px] font-medium uppercase tracking-[0.32em] text-[#c8a96b]">Plan your event</p>
+        <h1 className="mt-3 text-4xl font-medium leading-tight tracking-[-0.06em] text-[#f5f0e6] sm:text-5xl">Share a few details and we’ll take it from there.</h1>
       </header>
 
-      <form onSubmit={handleSubmit} className="grid gap-6 rounded-3xl border border-[#2a2927] bg-[#171614] p-5 sm:p-8" noValidate>
+      <form onSubmit={handleSubmit} className="grid gap-6 rounded-[2rem] border border-white/10 bg-[#151515] p-5 sm:p-8" noValidate>
         <div className="grid gap-5 md:grid-cols-2">
-          <label className="grid gap-2 text-sm text-[#f4efe7]">
+          <div className="md:col-span-2">
+            <p className="text-[11px] font-medium uppercase tracking-[0.3em] text-[#c8a96b]">About you</p>
+          </div>
+
+          <label className="grid gap-2 text-sm text-[#f5f0e6]">
             Full Name
-            <input className="min-h-12 rounded-xl border border-[#2a2927] bg-[#11100f] px-3 text-[#f4efe7] outline-none focus:border-[#d6b57a]"
+            <input className="min-h-12 rounded-xl border border-white/10 bg-[#0d0d0d] px-3 text-[#f5f0e6] outline-none transition focus:border-[#c8a96b] focus:ring-2 focus:ring-[#c8a96b]/40"
               name="client_name" value={form.client_name} onChange={handleChange} aria-invalid={Boolean(errors.client_name)} />
-            {errors.client_name && <span className="text-sm text-[#f0b79d]">{errors.client_name}</span>}
+            {errors.client_name && <span className="text-sm text-[#f2b89a]">{errors.client_name}</span>}
           </label>
 
-          <label className="grid gap-2 text-sm text-[#f4efe7]">
+          <label className="grid gap-2 text-sm text-[#f5f0e6]">
             Email
-            <input type="email" className="min-h-12 rounded-xl border border-[#2a2927] bg-[#11100f] px-3 text-[#f4efe7] outline-none focus:border-[#d6b57a]"
+            <input type="email" className="min-h-12 rounded-xl border border-white/10 bg-[#0d0d0d] px-3 text-[#f5f0e6] outline-none transition focus:border-[#c8a96b] focus:ring-2 focus:ring-[#c8a96b]/40"
               name="email" value={form.email} onChange={handleChange} aria-invalid={Boolean(errors.email)} />
-            {errors.email && <span className="text-sm text-[#f0b79d]">{errors.email}</span>}
+            {errors.email && <span className="text-sm text-[#f2b89a]">{errors.email}</span>}
           </label>
 
-          <label className="grid gap-2 text-sm text-[#f4efe7]">
+          <label className="grid gap-2 text-sm text-[#f5f0e6]">
             Mobile Number
-            <input type="tel" className="min-h-12 rounded-xl border border-[#2a2927] bg-[#11100f] px-3 text-[#f4efe7] outline-none focus:border-[#d6b57a]"
+            <input type="tel" className="min-h-12 rounded-xl border border-white/10 bg-[#0d0d0d] px-3 text-[#f5f0e6] outline-none transition focus:border-[#c8a96b] focus:ring-2 focus:ring-[#c8a96b]/40"
               name="phone" value={form.phone} onChange={handleChange} aria-invalid={Boolean(errors.phone)} />
-            {errors.phone && <span className="text-sm text-[#f0b79d]">{errors.phone}</span>}
+            {errors.phone && <span className="text-sm text-[#f2b89a]">{errors.phone}</span>}
           </label>
 
-          <label className="grid gap-2 text-sm text-[#f4efe7]">
+          <label className="grid gap-2 text-sm text-[#f5f0e6]">
             Event Type
-            <select className="min-h-12 rounded-xl border border-[#2a2927] bg-[#11100f] px-3 text-[#f4efe7] outline-none focus:border-[#d6b57a]"
+            <select className="min-h-12 rounded-xl border border-white/10 bg-[#0d0d0d] px-3 text-[#f5f0e6] outline-none transition focus:border-[#c8a96b] focus:ring-2 focus:ring-[#c8a96b]/40"
               name="event_type" value={form.event_type} onChange={handleChange} aria-invalid={Boolean(errors.event_type)}>
               <option value="">Select</option>
               <option value="Wedding">Wedding</option>
@@ -117,62 +121,66 @@ export function InquiryPage() {
               <option value="Private Event">Private Event</option>
               <option value="Institutional Program">Institutional Program</option>
             </select>
-            {errors.event_type && <span className="text-sm text-[#f0b79d]">{errors.event_type}</span>}
+            {errors.event_type && <span className="text-sm text-[#f2b89a]">{errors.event_type}</span>}
           </label>
 
-          <label className="grid gap-2 text-sm text-[#f4efe7]">
+          <label className="grid gap-2 text-sm text-[#f5f0e6]">
             Event Date
-            <input type="date" className="min-h-12 rounded-xl border border-[#2a2927] bg-[#11100f] px-3 text-[#f4efe7] outline-none focus:border-[#d6b57a]"
+            <input type="date" className="min-h-12 rounded-xl border border-white/10 bg-[#0d0d0d] px-3 text-[#f5f0e6] outline-none transition focus:border-[#c8a96b] focus:ring-2 focus:ring-[#c8a96b]/40"
               name="event_date" value={form.event_date} onChange={handleChange} aria-invalid={Boolean(errors.event_date)} />
-            {errors.event_date && <span className="text-sm text-[#f0b79d]">{errors.event_date}</span>}
+            {errors.event_date && <span className="text-sm text-[#f2b89a]">{errors.event_date}</span>}
           </label>
 
-          <label className="grid gap-2 text-sm text-[#f4efe7]">
+          <label className="grid gap-2 text-sm text-[#f5f0e6]">
             Event Location
-            <input className="min-h-12 rounded-xl border border-[#2a2927] bg-[#11100f] px-3 text-[#f4efe7] outline-none focus:border-[#d6b57a]"
+            <input className="min-h-12 rounded-xl border border-white/10 bg-[#0d0d0d] px-3 text-[#f5f0e6] outline-none transition focus:border-[#c8a96b] focus:ring-2 focus:ring-[#c8a96b]/40"
               name="event_location" value={form.event_location} onChange={handleChange} aria-invalid={Boolean(errors.event_location)} />
-            {errors.event_location && <span className="text-sm text-[#f0b79d]">{errors.event_location}</span>}
+            {errors.event_location && <span className="text-sm text-[#f2b89a]">{errors.event_location}</span>}
           </label>
 
-          <label className="grid gap-2 text-sm text-[#f4efe7]">
+          <label className="grid gap-2 text-sm text-[#f5f0e6]">
             Estimated Guest Count
-            <input type="number" min="1" className="min-h-12 rounded-xl border border-[#2a2927] bg-[#11100f] px-3 text-[#f4efe7] outline-none focus:border-[#d6b57a]"
+            <input type="number" min="1" className="min-h-12 rounded-xl border border-white/10 bg-[#0d0d0d] px-3 text-[#f5f0e6] outline-none transition focus:border-[#c8a96b] focus:ring-2 focus:ring-[#c8a96b]/40"
               name="guest_count" value={form.guest_count} onChange={handleChange} aria-invalid={Boolean(errors.guest_count)} />
-            {errors.guest_count && <span className="text-sm text-[#f0b79d]">{errors.guest_count}</span>}
+            {errors.guest_count && <span className="text-sm text-[#f2b89a]">{errors.guest_count}</span>}
           </label>
 
-          <label className="grid gap-2 text-sm text-[#f4efe7]">
-            Estimated Budget Range
+          <label className="grid gap-2 text-sm text-[#f5f0e6]">
+            Estimated Budget
             <div className="grid grid-cols-2 gap-3">
-              <input type="number" min="0" placeholder="Min" className="min-h-12 rounded-xl border border-[#2a2927] bg-[#11100f] px-3 text-[#f4efe7] outline-none focus:border-[#d6b57a]"
+              <input type="number" min="0" placeholder="Min" className="min-h-12 rounded-xl border border-white/10 bg-[#0d0d0d] px-3 text-[#f5f0e6] outline-none transition focus:border-[#c8a96b] focus:ring-2 focus:ring-[#c8a96b]/40"
                 name="budget_min" value={form.budget_min} onChange={handleChange} aria-invalid={Boolean(errors.budget_min)} />
-              <input type="number" min="0" placeholder="Max" className="min-h-12 rounded-xl border border-[#2a2927] bg-[#11100f] px-3 text-[#f4efe7] outline-none focus:border-[#d6b57a]"
+              <input type="number" min="0" placeholder="Max" className="min-h-12 rounded-xl border border-white/10 bg-[#0d0d0d] px-3 text-[#f5f0e6] outline-none transition focus:border-[#c8a96b] focus:ring-2 focus:ring-[#c8a96b]/40"
                 name="budget_max" value={form.budget_max} onChange={handleChange} aria-invalid={Boolean(errors.budget_max)} />
             </div>
-            {(errors.budget_min || errors.budget_max) && <span className="text-sm text-[#f0b79d]">{errors.budget_min || errors.budget_max}</span>}
+            {(errors.budget_min || errors.budget_max) && <span className="text-sm text-[#f2b89a]">{errors.budget_min || errors.budget_max}</span>}
           </label>
 
-          <label className="md:col-span-2 grid gap-2 text-sm text-[#f4efe7]">
+          <div className="md:col-span-2">
+            <p className="text-[11px] font-medium uppercase tracking-[0.3em] text-[#c8a96b]">Planning</p>
+          </div>
+
+          <label className="md:col-span-2 grid gap-2 text-sm text-[#f5f0e6]">
             Services Needed
-            <input className="min-h-12 rounded-xl border border-[#2a2927] bg-[#11100f] px-3 text-[#f4efe7] outline-none focus:border-[#d6b57a]"
+            <input className="min-h-12 rounded-xl border border-white/10 bg-[#0d0d0d] px-3 text-[#f5f0e6] outline-none transition focus:border-[#c8a96b] focus:ring-2 focus:ring-[#c8a96b]/40"
               name="services_needed" value={form.services_needed} onChange={handleChange} aria-invalid={Boolean(errors.services_needed)} />
-            {errors.services_needed && <span className="text-sm text-[#f0b79d]">{errors.services_needed}</span>}
+            {errors.services_needed && <span className="text-sm text-[#f2b89a]">{errors.services_needed}</span>}
           </label>
 
-          <label className="md:col-span-2 grid gap-2 text-sm text-[#f4efe7]">
-            Message / Event Description
-            <textarea rows={5} className="rounded-xl border border-[#2a2927] bg-[#11100f] px-3 py-2 text-[#f4efe7] outline-none focus:border-[#d6b57a]"
+          <label className="md:col-span-2 grid gap-2 text-sm text-[#f5f0e6]">
+            Event Description
+            <textarea rows={5} className="rounded-xl border border-white/10 bg-[#0d0d0d] px-3 py-2 text-[#f5f0e6] outline-none transition focus:border-[#c8a96b] focus:ring-2 focus:ring-[#c8a96b]/40"
               name="message" value={form.message} onChange={handleChange} aria-invalid={Boolean(errors.message)} />
-            {errors.message && <span className="text-sm text-[#f0b79d]">{errors.message}</span>}
+            {errors.message && <span className="text-sm text-[#f2b89a]">{errors.message}</span>}
           </label>
         </div>
 
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <button type="submit" disabled={isSubmitting} className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#d6b57a] px-6 text-sm font-medium text-[#171614] disabled:cursor-not-allowed disabled:opacity-70">
+        <div className="flex flex-col gap-4 pt-2 sm:flex-row sm:items-center sm:justify-between">
+          <button type="submit" disabled={isSubmitting} className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#c8a96b] px-6 text-sm font-medium text-[#141311] transition hover:bg-[#e0c184] disabled:cursor-not-allowed disabled:opacity-70">
             {isSubmitting ? 'Sending...' : 'Submit Inquiry'}
           </button>
           {submitMessage && (
-            <p className={isSuccess ? 'text-[#d6b57a]' : 'text-[#f0b79d]'}>{submitMessage}</p>
+            <p className={isSuccess ? 'text-[#c8a96b]' : 'text-[#f2b89a]'}>{submitMessage}</p>
           )}
         </div>
       </form>

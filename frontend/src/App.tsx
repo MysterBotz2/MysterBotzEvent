@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { BrowserRouter, Link, NavLink, Route, Routes } from 'react-router-dom'
 import { Logo } from './components/Logo'
 import { AboutPage } from './pages/AboutPage'
@@ -16,31 +17,71 @@ const navItems = [
 ]
 
 function AppShell() {
+  const [menuOpen, setMenuOpen] = useState(false)
+
   return (
-    <div className="min-h-screen bg-[#11100f] text-[#f4efe7]">
-      <header className="sticky top-0 z-50 border-b border-[#2a2927] bg-[#11100f]/90 backdrop-blur-sm">
+    <div className="min-h-screen bg-[#0d0d0d] text-[#f5f0e6]">
+      <header className="sticky top-0 z-50 border-b border-white/10 bg-[#0d0d0d]/85 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
-          <Link to="/" aria-label="MysterBotz home" className="shrink-0">
-            <Logo compact={false} />
+          <Link to="/" aria-label="MysterBotz home" className="shrink-0" onClick={() => setMenuOpen(false)}>
+            <Logo />
           </Link>
 
           <nav className="hidden items-center gap-6 md:flex" aria-label="Main navigation">
             {navItems.map((item) => (
-              <NavLink key={item.to} to={item.to} className={({ isActive }) => `text-sm font-medium transition ${isActive ? 'text-[#d6b57a]' : 'text-[#e7e0d4] hover:text-[#d6b57a]'}`}>
+              <NavLink
+                key={item.to}
+                to={item.to}
+                className={({ isActive }) =>
+                  `text-sm font-medium transition ${isActive ? 'text-[#c8a96b]' : 'text-[#ebe3d5] hover:text-[#c8a96b]'}`
+                }
+              >
                 {item.label}
               </NavLink>
             ))}
-            <Link to="/inquire" className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#d6b57a] px-5 text-sm font-medium text-[#171614] hover:bg-[#e4c88f] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#d6b57a]">
+            <Link to="/inquire" className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#c8a96b] px-5 text-sm font-medium text-[#141311] transition hover:bg-[#e0c184] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#c8a96b] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d0d0d]">
               Plan Your Event
             </Link>
           </nav>
 
-          <div className="md:hidden">
-            <Link to="/inquire" className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#d6b57a] px-4 text-sm font-medium text-[#171614]">
+          <div className="flex items-center gap-3 md:hidden">
+            <Link to="/inquire" className="inline-flex min-h-11 items-center justify-center rounded-full bg-[#c8a96b] px-4 text-sm font-medium text-[#141311] transition hover:bg-[#e0c184]">
               Plan Your Event
             </Link>
+            <button
+              type="button"
+              aria-label="Toggle menu"
+              aria-expanded={menuOpen}
+              onClick={() => setMenuOpen((open) => !open)}
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-[#151515] text-[#f5f0e6]"
+            >
+              <span className="flex flex-col gap-1.5">
+                <span className="block h-0.5 w-5 rounded-full bg-current" />
+                <span className="block h-0.5 w-5 rounded-full bg-current" />
+                <span className="block h-0.5 w-5 rounded-full bg-current" />
+              </span>
+            </button>
           </div>
         </div>
+
+        {menuOpen ? (
+          <div id="mobile-menu" className="border-t border-white/10 bg-[#0d0d0d] md:hidden">
+            <nav className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-4 sm:px-6" aria-label="Mobile navigation">
+              {navItems.map((item) => (
+                <NavLink
+                  key={item.to}
+                  to={item.to}
+                  onClick={() => setMenuOpen(false)}
+                  className={({ isActive }) =>
+                    `rounded-xl px-3 py-3 text-base font-medium transition ${isActive ? 'bg-[#151515] text-[#c8a96b]' : 'text-[#f5f0e6] hover:bg-[#151515]'}`
+                  }
+                >
+                  {item.label}
+                </NavLink>
+              ))}
+            </nav>
+          </div>
+        ) : null}
       </header>
 
       <Routes>
@@ -52,38 +93,43 @@ function AppShell() {
         <Route path="/inquire" element={<InquiryPage />} />
       </Routes>
 
-      <footer className="border-t border-[#2a2927] bg-[#11100f]">
-        <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 lg:grid-cols-5 lg:px-8">
-          <div className="lg:col-span-2">
-            <Logo compact />
-            <p className="mt-4 max-w-sm text-sm leading-6 text-[#d9d1c5]">Beautifully planned. Brilliantly unnoticed.</p>
-          </div>
+      <footer className="border-t border-white/10 bg-[#0d0d0d]">
+        <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[1.4fr_0.8fr_0.8fr_0.8fr] lg:px-8">
           <div>
-            <p className="text-xs uppercase tracking-[0.24em] text-[#d6b57a]">Explore</p>
-            <ul className="mt-4 space-y-2 text-sm text-[#d9d1c5]">
-              <li><Link to="/services">Services</Link></li>
-              <li><Link to="/portfolio">Portfolio</Link></li>
-              <li><Link to="/about">About</Link></li>
+            <Logo compact />
+            <p className="mt-4 max-w-xs text-sm leading-7 text-[#aaa49a]">Beautifully planned. Brilliantly unnoticed.</p>
+          </div>
+
+          <div>
+            <p className="text-[11px] font-medium uppercase tracking-[0.3em] text-[#c8a96b]">Explore</p>
+            <ul className="mt-4 space-y-3 text-sm text-[#ddd5c9]">
+              <li><Link to="/services" className="hover:text-[#c8a96b]">Services</Link></li>
+              <li><Link to="/portfolio" className="hover:text-[#c8a96b]">Portfolio</Link></li>
+              <li><Link to="/about" className="hover:text-[#c8a96b]">About</Link></li>
+              <li><Link to="/contact" className="hover:text-[#c8a96b]">Contact</Link></li>
             </ul>
           </div>
+
           <div>
-            <p className="text-xs uppercase tracking-[0.24em] text-[#d6b57a]">Contact</p>
-            <ul className="mt-4 space-y-2 text-sm text-[#d9d1c5]">
-              <li>hello@mysterbotz.events</li>
+            <p className="text-[11px] font-medium uppercase tracking-[0.3em] text-[#c8a96b]">Contact</p>
+            <ul className="mt-4 space-y-3 text-sm text-[#ddd5c9]">
+              <li>markboton.mysterbotz@gmail.com</li>
               <li>+63 (000) 000-0000</li>
               <li>Philippines</li>
             </ul>
           </div>
+
           <div>
-            <p className="text-xs uppercase tracking-[0.24em] text-[#d6b57a]">Legal</p>
-            <ul className="mt-4 space-y-2 text-sm text-[#d9d1c5]">
-              <li>Privacy Policy</li>
+            <p className="text-[11px] font-medium uppercase tracking-[0.3em] text-[#c8a96b]">Follow</p>
+            <ul className="mt-4 space-y-3 text-sm text-[#ddd5c9]">
               <li>Instagram</li>
               <li>Facebook</li>
+              <li>Privacy Policy</li>
             </ul>
           </div>
         </div>
-        <div className="border-t border-[#2a2927] py-4 text-center text-xs uppercase tracking-[0.2em] text-[#d9d1c5]">
+
+        <div className="border-t border-white/10 py-4 text-center text-[10px] uppercase tracking-[0.24em] text-[#aaa49a]">
           © 2026 MysterBotz Events & Experiences
         </div>
       </footer>

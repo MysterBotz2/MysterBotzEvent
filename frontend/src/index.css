@@ -1,8 +1,8 @@
 @import 'tailwindcss';
 
 :root {
-  color: #f4efe7;
-  background-color: #11100f;
+  color: #f5f0e6;
+  background-color: #0d0d0d;
   font-family: Inter, 'Segoe UI', sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -10,6 +10,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color-scheme: dark;
 }
 
 * {
@@ -24,14 +25,21 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background: #11100f;
-  color: #f4efe7;
+  background:
+    radial-gradient(circle at top, rgba(200, 169, 107, 0.12), transparent 28%),
+    #0d0d0d;
+  color: #f5f0e6;
   overflow-x: hidden;
 }
 
 img {
   max-width: 100%;
   display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
 button,
@@ -46,7 +54,7 @@ select {
 }
 
 ::selection {
-  background: rgba(214, 181, 122, 0.3);
+  background: rgba(200, 169, 107, 0.3);
 }
 
 @media (prefers-reduced-motion: reduce) {
