@@ -7,7 +7,9 @@ from fastapi.testclient import TestClient
 
 from app.core.database import Base, engine
 from app.main import app
+from app.models.admin_user import AdminUser  # noqa: F401
 
+Base.metadata.drop_all(bind=engine)
 Base.metadata.create_all(bind=engine)
 client = TestClient(app)
 
@@ -73,3 +75,24 @@ def test_invalid_inquiry_rejected():
     }
     response = client.post("/api/v1/inquiries", json=payload)
     assert response.status_code == 422
+
+
+def test_admin_foundation_models_are_registered():
+    from sqlalchemy import inspect
+
+    inspector = inspect(engine)
+
+    assert "admin_users" in inspector.get_table_names()
+
+    admin_columns = {column["name"] for column in inspector.get_columns("admin_users")}
+    assert {
+        "id",
+        "email",
+        "password_hash",
+        "is_active",
+        "created_at",
+        "updated_at",
+    }.issubset(admin_columns)
+
+    inquiry_columns = {column["name"] for column in inspector.get_columns("inquiries")}
+    assert "admin_notes" in inquiry_columns
